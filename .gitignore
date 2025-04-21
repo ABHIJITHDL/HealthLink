@@ -52,8 +52,11 @@ Thumbs.db
 # ======================================
 # Spring Boot Backend
 # ======================================
-/backend/src/main/resources/static/connection-profiles/org1/wallet/
-/backend/src/main/resources/static/connection-profiles/org2/wallet/
+/backend/src/main/resources/static/connection-profiles/org1/wallet/*
+!/backend/src/main/resources/static/connection-profiles/org1/wallet/.gitkeep
+
+/backend/src/main/resources/static/connection-profiles/org2/wallet/*
+!/backend/src/main/resources/static/connection-profiles/org2/wallet/.gitkeep
 /backend/target/
 # Logs
 /blockchain/*.log
