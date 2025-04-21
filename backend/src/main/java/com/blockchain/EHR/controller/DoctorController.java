@@ -3,48 +3,26 @@ package com.blockchain.EHR.controller;
 
 import com.blockchain.EHR.jwt.JwtUtils;
 import com.blockchain.EHR.model.EhrDocument;
-import com.blockchain.EHR.model.Patient;
 import com.blockchain.EHR.model.PatientStatus;
 import com.blockchain.EHR.model.Pending;
 import com.blockchain.EHR.repository.PatientRepository;
-import com.blockchain.EHR.repository.PendingRepository;
 import com.blockchain.EHR.services.DoctorService;
 import com.blockchain.EHR.services.EhrService;
-import com.blockchain.EHR.services.PdfService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.OpAnd;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import com.itextpdf.kernel.pdf.*;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
 @Validated
 @RequestMapping("/fabric/doctor")
 public class DoctorController {
-
-    @Autowired
-    private PdfService pdfService;
     @Autowired
     PatientRepository patientRepository;
 
