@@ -1,0 +1,90 @@
+# ======================================
+# Root-Level (General & IDE settings)
+# ======================================
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+.env
+.env.*
+.idea/
+.vscode/
+*.swp
+
+# ======================================
+# React Frontend (/frontend)
+# ======================================
+/frontend/node_modules/
+/frontend/build/
+/frontend/.env
+/frontend/.env.local
+/frontend/.env.production
+/frontend/.env.development
+/frontend/.cache/
+/frontend/.turbo/
+/frontend/.vite/
+/frontend/.parcel-cache/
+/frontend/public/build/
+/frontend/package-lock.json
+/frontend/yarn.lock
+
+# IDEs and Editor folders
+/frontend/.vscode/
+/frontend/.idea/
+
+# ======================================
+# Hyperledger Fabric Blockchain
+# ======================================
+/blockchain/node_modules/
+/blockchain/tmp/
+/blockchain/temp/
+/blockchain/.env
+/blockchain/.env.*
+/blockchain/.DS_Store
+/blockchain/.vscode/
+/blockchain/.idea/
+/blockchain/package-lock.json
+/blockchain/yarn.lock
+/blockchain/build/
+/blockchain/.cache/
+ 
+
+# ======================================
+# Spring Boot Backend
+# ======================================
+/backend/src/main/resources/static/connection-profiles/org1/wallet/
+/backend/src/main/resources/static/connection-profiles/org2/wallet/
+/backend/target/
+# Logs
+/blockchain/*.log
+/blockchain/logs/
+/blockchain/**/*.log
+
+# Fabric-specific generated content
+/blockchain/wallet/
+/blockchain/organizations/
+/blockchain/crypto-config/
+/blockchain/fabric-ca/
+/blockchain/fabric-network.json
+/blockchain/connection-org*.json
+/blockchain/artifacts/channel/crypto-config/peerOrganizations/
+/blockchain/artifacts/channel/crypto-config/ordererOrganizations/
+/blockchain/certificates/
+/blockchain/*.block
+/blockchain/*.tx
+/blockchain/.fabric/
+
+# Chaincode files (if using external chaincode folder)
+/blockchain/chaincode/**/node_modules/
+/blockchain/chaincode/**/dist/
+/blockchain/chaincode/**/build/
+/blockchain/chaincode/**/.env
+
+# Secrets and Keys
+/blockchain/*.key
+/blockchain/*.pem
+/blockchain/private-keys/
+
+# Docker Compose overrides and artifacts
+/blockchain/docker-compose.override.yml
+/blockchain/*.tar.gz
