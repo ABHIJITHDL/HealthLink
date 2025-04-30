@@ -30,10 +30,12 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Base64;
 import java.util.Locale;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class FabricGatewayService {
+    private static final Logger logger = LoggerFactory.getLogger(FabricGatewayService.class);
     static {
         Security.addProvider(new BouncyCastleProvider());
     }
@@ -47,6 +49,7 @@ public class FabricGatewayService {
         // Load connection profile dynamically for the organization
         ClassPathResource connectionProfileResource = new ClassPathResource("static/connection-profiles/" + orgName + "/connection-" + orgName + ".json");
         File connectionProfileFile = connectionProfileResource.getFile();
+        
         JsonNode connectionProfile = mapper.readTree(connectionProfileFile);
 
         // Retrieve peer information dynamically based on organization and peer0
@@ -54,10 +57,14 @@ public class FabricGatewayService {
         String grpcUrl = connectionProfile.path("peers").path(peerName).path("url").asText();
         String tlsCertPem = connectionProfile.path("peers").path(peerName).path("tlsCACerts").path("pem").asText();
 
-        ClassPathResource walletResource = new ClassPathResource("static/connection-profiles/" + orgName + "/wallet");
-        Path walletPath = walletResource.getFile().toPath();
-        Path userFilePath = walletPath.resolve(username + ".id");
-        JsonNode userCredentials = mapper.readTree(userFilePath.toFile());
+        // Replace the code for accessing wallet files with this:
+        ClassPathResource walletResource = new ClassPathResource("static/connection-profiles/" + orgName + "/wallet/" + username + ".id");
+        File walletFile = walletResource.getFile();
+        
+        JsonNode userCredentials = mapper.readTree(walletFile);
+
+        logger.info("Connection Profile File: {}", connectionProfileFile.getAbsolutePath());
+        logger.info("Wallet File: {}", walletFile.getAbsolutePath());
 
         String certificatePem = userCredentials.path("credentials").path("certificate").asText();
         String privateKeyPem = userCredentials.path("credentials").path("privateKey").asText();

@@ -91,3 +91,5 @@ Thumbs.db
 # Docker Compose overrides and artifacts
 /blockchain/docker-compose.override.yml
 /blockchain/*.tar.gz
+
+/blockchain/fabric
