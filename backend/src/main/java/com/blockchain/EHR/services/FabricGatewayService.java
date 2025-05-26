@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 @Service
 public class FabricGatewayService {
     private static final Logger logger = LoggerFactory.getLogger(FabricGatewayService.class);
+    private static final String basePath = "src/main/resources/static/connection-profiles";
     static {
         Security.addProvider(new BouncyCastleProvider());
     }
@@ -47,8 +48,9 @@ public class FabricGatewayService {
         String orgName = mspId.substring(0, mspId.length() - 3).toLowerCase();
 
         // Load connection profile dynamically for the organization
-        ClassPathResource connectionProfileResource = new ClassPathResource("static/connection-profiles/" + orgName + "/connection-" + orgName + ".json");
-        File connectionProfileFile = connectionProfileResource.getFile();
+        Path connectionProfilePath = Paths.get(basePath, orgName.toLowerCase(),
+                "connection-" + orgName.toLowerCase() + ".json");
+        File connectionProfileFile = connectionProfilePath.toFile();
         
         JsonNode connectionProfile = mapper.readTree(connectionProfileFile);
 
@@ -58,8 +60,8 @@ public class FabricGatewayService {
         String tlsCertPem = connectionProfile.path("peers").path(peerName).path("tlsCACerts").path("pem").asText();
 
         // Replace the code for accessing wallet files with this:
-        ClassPathResource walletResource = new ClassPathResource("static/connection-profiles/" + orgName + "/wallet/" + username + ".id");
-        File walletFile = walletResource.getFile();
+        Path walletFilePath = Paths.get(basePath, orgName.toLowerCase(), "wallet", username + ".id");
+        File walletFile = walletFilePath.toFile();
         
         JsonNode userCredentials = mapper.readTree(walletFile);
 

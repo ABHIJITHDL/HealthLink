@@ -35,7 +35,7 @@ public class FabricUserRegistration {
 
     private static final String ADMIN_NAME = "admin";
     private static final String ADMIN_PASSWORD = "adminpw";
-
+    private static final String basePath = "src/main/resources/static/connection-profiles";
 //    // Path to the CA's TLS certificate
 //    private static final String CA_CERT_PATH = Paths.get("artifacts", "channel", "crypto-config", "peerOrganizations", "org1.example.com", "tlsca", "tlsca.org1.example.com-cert.pem").toString();
 //
@@ -108,8 +108,9 @@ public class FabricUserRegistration {
         try {
             // Load the JSON configuration file
             ObjectMapper mapper = new ObjectMapper();
-            ClassPathResource connectionProfileResource = new ClassPathResource(String.format("static/connection-profiles/%s/connection-%s.json", organization.toLowerCase(), organization.toLowerCase()));
-            File connectionProfileFile = connectionProfileResource.getFile();
+            Path connectionProfilePath = Paths.get(basePath, organization.toLowerCase(),
+                    String.format("connection-%s.json", organization.toLowerCase()));
+            File connectionProfileFile = connectionProfilePath.toFile();
             JsonNode connectionProfile = mapper.readTree(connectionProfileFile);
 
             // Retrieve the configuration for the specified organization
@@ -151,8 +152,10 @@ public class FabricUserRegistration {
     private  void saveUserCredentials(String username, Enrollment enrollment, String mspId) throws Exception {
         String org = getOrganizationFromMSP(mspId);
         // Define the wallet directory
-        ClassPathResource walletResource = new ClassPathResource("static/connection-profiles/" + org + "/wallet");
-        File walletDir = walletResource.getFile();
+        Path connectionProfileBase = Paths.get(basePath, org.toLowerCase());
+        Path walletPath = connectionProfileBase.resolve("wallet");
+        Path connectionJsonPath = connectionProfileBase.resolve("connection-" + org.toLowerCase() + ".json");
+        File walletDir = walletPath.toFile();
 
         // Construct the path for the user's JSON wallet entry
         File walletFile = new File(walletDir, username + ".id");
