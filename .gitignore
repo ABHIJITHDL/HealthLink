@@ -76,6 +76,7 @@ Thumbs.db
 /blockchain/*.block
 /blockchain/*.tx
 /blockchain/.fabric/
+/blockchain/channel-artifacts/
 
 # Chaincode files (if using external chaincode folder)
 /blockchain/chaincode/**/node_modules/
