@@ -6,11 +6,11 @@ import org.hyperledger.fabric.client.Contract;
 import org.hyperledger.fabric.client.Gateway;
 import org.hyperledger.fabric.client.Network;
 import org.hyperledger.fabric.client.Proposal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 @Service
 public class FabricService {
     private static final Logger logger = LoggerFactory.getLogger(FabricService.class);

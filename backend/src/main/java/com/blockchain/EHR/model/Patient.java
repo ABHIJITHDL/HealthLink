@@ -1,7 +1,6 @@
 package com.blockchain.EHR.model;
 
-import jakarta.persistence.Lob;
-import lombok.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

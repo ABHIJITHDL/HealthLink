@@ -2,7 +2,6 @@ package com.blockchain.EHR.repository;
 
 import com.blockchain.EHR.model.Pending;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -7,13 +7,11 @@ import com.blockchain.EHR.repository.PendingRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hyperledger.fabric.client.Contract;
-import org.hyperledger.fabric.client.Proposal;
-import org.hyperledger.fabric.protos.peer.ProposalResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,60 +85,38 @@ public class PatientService {
         EhrDocument ehrDocument = ehrService.fetchPdf(pid);
         String hash = ehrService.getHash(ehrDocument);
         String s;
+        LocalDateTime now = LocalDateTime.now();
+        String formatted = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         switch (status) {
             case "Accepted" -> {
                 String[] args = {pid, did};
+
                 String response = fabricService.submitTransaction("mychannel", "ehr", "getEHRRecord", args, pid, mspId);
                 if (response.startsWith("Transaction")) {
                     System.out.println("creating EHR");
-                    String[] create = {did, pid, hash, LocalDate.now().toString()};
+                    String[] create = {did, pid, hash, formatted};
                     s = fabricService.submitTransaction("mychannel", "ehr", "createEHRRecord", create, pid, mspId);
                     if (s.startsWith("Transaction"))
                         throw new RuntimeException("EHR creation failed:" + s);
                 }else{
-                    String[] activate = {did, pid, hash, LocalDate.now().toString()};
+                    String[] activate = {did, pid, hash, formatted};
                     s = fabricService.submitTransaction("mychannel", "ehr", "activateAccess", activate, pid, mspId);
                     if (s.startsWith("Transaction"))
                         throw new RuntimeException("EHR revoke update failed: " + s);
                 }
             }
             case "Revoked" -> {
-                String[] activate = {did, pid, hash,LocalDate.now().toString()};
+                String[] activate = {did, pid, hash,formatted};
                 s = fabricService.submitTransaction("mychannel", "ehr", "revokeAccess", activate, pid, mspId);
                 if (s.startsWith("Transaction"))
                     throw new RuntimeException("EHR revoke update failed: " + s);
 
             }
             case "Activate" -> {
-                String[] activate = {did, pid, hash, LocalDate.now().toString()};
+                String[] activate = {did, pid, hash, formatted};
                 s = fabricService.submitTransaction("mychannel", "ehr", "activateAccess", activate, pid, mspId);
                 if (s.startsWith("Transaction"))
                     throw new RuntimeException("EHR revoke update failed: " + s);
-//            Contract contract = fabricService.getContract("mychannel", "ehr", pid, mspId);
-//
-//            // Build and endorse the proposal
-//            try {
-//                // Endorse and submit the transaction
-//                Proposal proposal = contract.newProposal("activateAccess")
-//                        .addArguments(activate) // Add arguments to the proposal
-//                        .build();
-//
-//                // Endorse and submit the transaction
-//                proposal.endorse().submit();
-//                System.out.println("Transaction submitted successfully.");
-//            } catch (org.hyperledger.fabric.client.EndorseException e) {
-//                // Log detailed error information
-//                System.err.println("Endorsement failed: " + e.getMessage());
-//                e.getDetails().forEach(detail -> System.err.println("Detail: " + detail.getMessage()));
-//            } catch (io.grpc.StatusRuntimeException e) {
-//                // Log gRPC-specific error details
-//                System.err.println("gRPC error: " + e.getStatus().getDescription());
-//                System.err.println("gRPC status: " + e.getStatus().getCode());
-//            } catch (Exception e) {
-//                // Log any other exceptions
-//                System.err.println("Unexpected error: " + e.getMessage());
-//            }
-
             }
         }
         pending.setStatus(status);

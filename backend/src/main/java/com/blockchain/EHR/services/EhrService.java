@@ -3,11 +3,9 @@ package com.blockchain.EHR.services;
 import com.blockchain.EHR.model.EhrDocument;
 import com.blockchain.EHR.model.Patient;
 import com.blockchain.EHR.model.Pending;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Cipher;
