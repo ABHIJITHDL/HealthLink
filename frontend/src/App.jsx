@@ -99,9 +99,6 @@ const App = () => {
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               HealthLink
             </Typography>
-            <IconButton color="inherit" onClick={toggleDarkMode}>
-              {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Routes>

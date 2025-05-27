@@ -538,19 +538,7 @@ const AdminDashboard = () => {
                           </label>
                         </Box>
                       )}
-                      
-                      <Button
-                        onClick={handleDownloadSamplePDF}
-                        variant="text"
-                        size="small"
-                        startIcon={<CloudDownloadIcon />}
-                        sx={{ 
-                          mt: 2,
-                          color: orgColors.accent,
-                        }}
-                      >
-                        Download Sample PDF
-                      </Button>
+
                     </Paper>
                   </Grid>
                 )}

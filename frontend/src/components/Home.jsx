@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaShieldAlt, FaLock, FaTabletAlt, FaHeartbeat, FaCheckCircle, FaUserPlus, FaExchangeAlt } from 'react-icons/fa';
-import { IconButton } from '@mui/material';
+    import { IconButton } from '@mui/material';
 import { Brightness4 as DarkModeIcon, Brightness7 as LightModeIcon } from '@mui/icons-material';
 
 const Home = ({ darkMode, toggleDarkMode }) => {
@@ -46,7 +46,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
             <div className="col-lg-7">
               <h1 className="fw-bold mb-3" style={{ fontSize: '2.25rem' }}>Secure Health Records on Blockchain</h1>
               <p className="mb-4" style={{ fontSize: '1.125rem' }}>
-                HealthLink provides a decentralized platform for managing Electronic Health Records (EHR) 
+                HealthLink provides a decentralized platform for managing Electronic Health Records (EHR)
                 with security, privacy, and patient control.
               </p>
               <Link to="/login" className="btn btn-success px-4 py-3" style={{ fontSize: '1.125rem' }}>
@@ -54,10 +54,10 @@ const Home = ({ darkMode, toggleDarkMode }) => {
               </Link>
             </div>
             <div className="col-lg-5">
-              <img 
-                src="https://cdn.pixabay.com/photo/2017/10/04/09/56/laboratory-2815640_1280.jpg" 
-                className="img-fluid rounded shadow-sm" 
-                alt="Healthcare" 
+              <img
+                src="https://cdn.pixabay.com/photo/2017/10/04/09/56/laboratory-2815640_1280.jpg"
+                className="img-fluid rounded shadow-sm"
+                alt="Healthcare"
               />
             </div>
           </div>
@@ -71,7 +71,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
             <h2 className="fw-bold" style={{ fontSize: '2rem' }}>Key Features</h2>
             <p className="text-muted" style={{ fontSize: '1.125rem' }}>Built on Hyperledger Fabric for enterprise-grade security and performance</p>
           </div>
-          
+
           <div className="row g-3">
             {features.map((feature, index) => (
               <div className="col-md-4" key={index}>
@@ -97,7 +97,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
             <h2 className="fw-bold" style={{ fontSize: '2rem' }}>How It Works</h2>
             <p className="text-muted" style={{ fontSize: '1.125rem' }}>A seamless workflow for managing healthcare data</p>
           </div>
-          
+
           <div className="card border-0 shadow-sm">
             <div className="card-body p-3">
               <div className="row g-3">
